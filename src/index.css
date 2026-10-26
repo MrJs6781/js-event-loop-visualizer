@@ -1,0 +1,124 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+:root {
+  --bg: 236 241 247;
+  --surface: 255 255 255;
+  --raised: 245 248 252;
+  --line: 211 220 232;
+  --ink: 19 32 58;
+  --muted: 88 104 131;
+  --lane-stack: 59 91 219;
+  --lane-api: 168 108 18;
+  --lane-task: 13 133 121;
+  --lane-micro: 176 40 112;
+  --lane-render: 58 132 42;
+  --lane-tick: 190 64 12;
+  --danger: 196 38 48;
+  --font-ui: 'IBM Plex Sans', 'Vazirmatn', system-ui, sans-serif;
+  color-scheme: light;
+}
+
+.dark {
+  --bg: 14 23 38;
+  --surface: 20 32 56;
+  --raised: 25 39 67;
+  --line: 40 58 92;
+  --ink: 229 236 246;
+  --muted: 143 162 194;
+  --lane-stack: 128 150 255;
+  --lane-api: 240 182 80;
+  --lane-task: 64 204 186;
+  --lane-micro: 241 110 178;
+  --lane-render: 128 205 98;
+  --lane-tick: 251 141 92;
+  --danger: 255 112 112;
+  color-scheme: dark;
+}
+
+html[lang='fa'] {
+  --font-ui: 'Vazirmatn', 'IBM Plex Sans', system-ui, sans-serif;
+}
+
+html {
+  scroll-padding-top: env(safe-area-inset-top, 0px);
+}
+
+body {
+  @apply bg-bg font-ui text-ink antialiased;
+  background-image:
+    linear-gradient(rgb(var(--line) / 0.32) 1px, transparent 1px),
+    linear-gradient(90deg, rgb(var(--line) / 0.32) 1px, transparent 1px);
+  background-size: 28px 28px;
+  padding-top: env(safe-area-inset-top, 0px);
+}
+
+html[lang='fa'] body {
+  line-height: 1.75;
+}
+
+:focus-visible {
+  outline: 2px solid rgb(var(--lane-stack));
+  outline-offset: 2px;
+}
+
+.chip {
+  unicode-bidi: isolate;
+  direction: ltr;
+  display: inline-block;
+  font-family: 'JetBrains Mono', ui-monospace, monospace;
+  font-size: 0.86em;
+  line-height: 1.5;
+  padding: 0 0.4em;
+  border-radius: 5px;
+  background: rgb(var(--ink) / 0.07);
+  overflow-wrap: anywhere;
+}
+
+.lane-bar {
+  background: rgb(var(--lane));
+}
+
+.panel-focus {
+  box-shadow: 0 0 0 2px rgb(var(--lane) / 0.55);
+}
+
+.cm-editor {
+  height: 100%;
+}
+
+.cm-step-line {
+  background: rgb(var(--lane-stack) / 0.14) !important;
+  box-shadow: inset 3px 0 0 rgb(var(--lane-stack));
+}
+
+.cm-error-line {
+  background: rgb(var(--danger) / 0.14) !important;
+  box-shadow: inset 3px 0 0 rgb(var(--danger));
+}
+
+.scroll-thin {
+  scrollbar-width: thin;
+  scrollbar-color: rgb(var(--line)) transparent;
+}
+
+input[type='range'] {
+  accent-color: rgb(var(--lane-stack));
+}
+
+@keyframes pulse-soft {
+  50% {
+    opacity: 0.45;
+  }
+}
+
+.pulse-soft {
+  animation: pulse-soft 1.2s ease-in-out infinite;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .pulse-soft {
+    animation: none;
+  }
+}
